@@ -20,7 +20,7 @@ from werkzeug.utils import secure_filename
 app = Flask(__name__)
 
 # Model saved with Keras model.save()
-MODEL_PATH = 'CNN Model final.h5'
+MODEL_PATH = './CNN Model final.h5'
 
 # Load your trained model
 model = load_model(MODEL_PATH)
@@ -51,8 +51,9 @@ def model_predict(img_path, model):
     # # Be careful how your trained model deals with the input
     # # otherwise, it won't make correct prediction!
     # x = preprocess_input(x, mode='caffe')
-
-    preds = model.predict_classes(images)
+    
+    predict = model.predict(images)
+    preds=np.argmax(predict,axis=1)
     return preds
 
 
